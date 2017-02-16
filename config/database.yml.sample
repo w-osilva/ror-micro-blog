@@ -1,0 +1,27 @@
+default: &default
+  adapter: mysql2
+  reconnect: true
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+
+development:
+  <<: *default
+  host: localhost
+  database: micro_blog_dev
+  username: root
+  password: root
+
+
+test:
+  <<: *default
+  host: localhost
+  database: micro_blog_test
+  username: root
+  password: root
+
+production:
+  <<: *default
+  host: localhost
+  database: micro_blog_prod
+  username: root
+  password: root
