@@ -8,7 +8,10 @@ User.find_or_create_by(email: 'admin@blog.com') do |user|
       nickname: 'adminblog',
       birthdate: (Date.today - 20.years),
       about: Faker::Lorem.sentence(20, true, 30),
-      picture: Faker::Avatar.image
+      picture: Faker::Avatar.image,
+      visibility: Profile.visibility.private
   )
   user.save
 end
+
+puts '============================== Database seeded! ==============================='

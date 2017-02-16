@@ -26,6 +26,9 @@ gem 'mysql2'
 gem 'simple_form'
 gem 'devise'
 gem 'pundit'
+gem 'enumerize'
+# gem 'friendly_id', '~> 5.1.0'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug', platform: :mri
