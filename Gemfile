@@ -26,9 +26,13 @@ gem 'mysql2'
 gem 'simple_form'
 gem 'devise'
 gem 'pundit'
+gem 'enumerize'
+# gem 'friendly_id', '~> 5.1.0'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'faker'
 end
 
 group :development do
@@ -42,7 +46,6 @@ group :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-collection_matchers'
-  gem 'faker'
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
