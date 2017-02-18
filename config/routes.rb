@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
 
   resources :profile, controller: 'users/profiles', only: [:show, :edit, :update]
+  resources :post, controller: 'users/posts', only: [:create, :destroy]
 
 end

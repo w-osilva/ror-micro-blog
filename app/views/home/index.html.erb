@@ -1,2 +1,78 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+    <div class="row">
+      <% unless user_signed_in? %>
+          <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-warning"></i> Sign in to see all posts and members</h4>
+            <p>
+              Displaying only public content</p>
+          </div>
+      <% end %>
+
+      <div class="col-md-8">
+        <% if user_signed_in? %>
+          <%= render "users/posts/form" %>
+        <% end %>
+
+        <% @posts.each do |post| %>
+          <% if policy(post).show? %>
+            <div class="box box-primary">
+              <div class="box-body">
+
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="<%= post.user.profile.picture %>" alt="user image">
+                    <span class="username">
+                      <a href="#"><%= post.user.profile.full_name %></a>
+                      <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                    </span>
+                    <span class="description">Shared <%= post.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>
+                    <%= post.text %>
+                  </p>
+                  <ul class="list-inline">
+                    <% if user_signed_in? %>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>                  </li>
+                    <% end %>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+                  <% if user_signed_in? %>
+                      <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                  <% end %>
+                </div>
+
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+
+        <% @profiles.each do |profile| %>
+          <% if policy(profile).show? %>
+
+            <div class="box box-primary">
+              <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="<%= profile.picture %>" alt="User profile picture">
+
+                <h3 class="profile-username text-center"><%= profile.full_name %></h3>
+
+                <p class="text-muted text-center">Member since <%= profile.user.created_at.strftime("%d/%m/%Y") %></p>
+
+                <a href="<%= profile_path(profile) %>" class="btn btn-primary btn-block"><b>See more</b></a>
+              </div>
+              <!-- /.box-body -->
+            </div>
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+
+
+

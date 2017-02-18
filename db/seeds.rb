@@ -1,6 +1,6 @@
 # Add admin user and setup your profile
 
-User.find_or_create_by(email: 'admin@blog.com') do |user|
+user = User.find_or_create_by(email: 'admin@blog.com') do |user|
   user.password = 'admin123'
   user.profile = Profile.find_or_create_by(
       first_name: 'Admin',
@@ -13,5 +13,16 @@ User.find_or_create_by(email: 'admin@blog.com') do |user|
   )
   user.save
 end
+
+Post.find_or_create_by(
+    user: user,
+    text: "This is a post with public visibility and all user can see",
+    visibility: Post.visibility.public
+)
+Post.find_or_create_by(
+    user: user,
+    text: "This is a post with private visibility and only logged in users can see",
+    visibility: Post.visibility.private
+)
 
 puts '============================== Database seeded! ==============================='
