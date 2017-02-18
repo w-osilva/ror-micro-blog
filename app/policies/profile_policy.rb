@@ -2,7 +2,7 @@ class ProfilePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.guest?
+      if !user
         scope.where(visibility: Profile.visibility.public)
       else
         scope.all
@@ -11,14 +11,22 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def show?
-    record.visibility.public? || record.id == user.profile.id
+    user.present? || record.visibility.public?
   end
 
   def edit?
-    record.id == user.profile.id
+    can_change?
   end
 
   def update?
+    can_change?
+  end
+
+  def can_change?
     record.id == user.profile.id
+  end
+
+  def can_follow?
+    user.present? and user.id != record.user.id
   end
 end

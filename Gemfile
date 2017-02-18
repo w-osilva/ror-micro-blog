@@ -29,10 +29,10 @@ gem 'pundit'
 gem 'enumerize'
 # gem 'friendly_id', '~> 5.1.0'
 gem 'responders'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'faker'
 end
 
 group :development do

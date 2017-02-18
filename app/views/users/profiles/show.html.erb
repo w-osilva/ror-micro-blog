@@ -1,39 +1,160 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
+  <div class="row">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
+      <div class="col-md-4">
 
-<p>
-  <strong>Birthdate:</strong>
-  <%= @profile.birthdate %>
-</p>
+        <!-- Profile Image -->
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="<%= @profile.picture %>" alt="User profile picture">
 
-<p>
-  <strong>Nickname:</strong>
-  <%= @profile.nickname %>
-</p>
+            <h3 class="profile-username text-center"><%= @profile.full_name %></h3>
 
-<p>
-  <strong>About:</strong>
-  <%= @profile.about %>
-</p>
+            <p class="text-muted text-center">Member since <%= @profile.created_at.strftime("%d/%m/%Y") %></p>
 
-<p>
-  <strong>Picture:</strong>
-  <%= @profile.picture %>
-</p>
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>Posts</b> <a class="pull-right"><%= @profile.user.posts.count %></a>
+              </li>
+              <li class="list-group-item">
+                <b>Followers</b> <a class="pull-right">0</a>
+              </li>
+              <li class="list-group-item">
+                <b>Following</b> <a class="pull-right">0</a>
+              </li>
+            </ul>
+            <% if policy(@profile).can_follow? %>
+              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+            <% end %>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
 
-<p>
-  <strong>Visibility:</strong>
-  <%= @profile.visibility %>
-</p>
+        <!-- About Me Box -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">About Me</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+            <p><%= @profile.about %></p>
+            <hr>
+
+            <strong><i class="fa fa-briefcase margin-r-5"></i> Professional</strong>
+            <p class="text-muted">
+              <!--B.S. in Computer Science from the University of Tennessee at Knoxville-->
+            </p>
+            <hr>
+
+            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+            <p class="text-muted">
+              <!--B.S. in Computer Science from the University of Tennessee at Knoxville-->
+            </p>
+            <hr>
+
+            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+            <p class="text-muted">
+              <!--Malibu, California-->
+            </p>
+            <hr>
+
+            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+            <p>
+              <!--<span class="label label-danger">UI Design</span>-->
+              <!--<span class="label label-success">Coding</span>-->
+              <!--<span class="label label-info">Javascript</span>-->
+              <!--<span class="label label-warning">PHP</span>-->
+              <!--<span class="label label-primary">Node.js</span>-->
+            </p>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+
+    <div class="col-md-8">
+
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#information" data-toggle="tab" aria-expanded="true">Information</a></li>
+          <% if policy(@profile).can_change? %>
+            <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="information">
+
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>First Name: </b> <%= @profile.first_name %>
+              </li>
+              <li class="list-group-item">
+                <b>Last Name: </b> <%= @profile.last_name %>
+              </li>
+              <li class="list-group-item">
+                <b>Nickname: </b> <%= @profile.nickname %>
+              </li>
+              <li class="list-group-item">
+                <b>Birthdate: </b> <%= @profile.birthdate.strftime("%d/%m/%Y") %>
+              </li>
+            </ul>
+
+          </div>
+          <!-- /.tab-pane -->
+          <% if policy(@profile).can_change? %>
+              <div class="tab-pane" id="settings">
+                <%= render "users/profiles/form" %>
+              </div>
+              <!-- /.tab-pane -->
+          <% end %>
+        </div>
+        <!-- /.tab-content -->
+      </div>
+
+
+      <% @profile.user.posts.each do |post| %>
+        <% if policy(post).show? %>
+          <div class="box box-primary">
+            <div class="box-body">
+
+              <div class="post">
+                <div class="user-block">
+                  <img class="img-circle img-bordered-sm" src="<%= post.user.profile.picture %>" alt="user image">
+                    <span class="username">
+                      <a href="#"><%= post.user.profile.full_name %></a>
+                      <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                    </span>
+                  <span class="description">Shared <%= post.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+                </div>
+                <!-- /.user-block -->
+                <p>
+                  <%= post.text %>
+                </p>
+                <ul class="list-inline">
+                  <% if user_signed_in? %>
+                      <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                      <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>                  </li>
+                  <% end %>
+                  <li class="pull-right">
+                    <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                      (5)</a></li>
+                </ul>
+                <% if user_signed_in? %>
+                    <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+    <!-- /.col -->
+  </div>
 

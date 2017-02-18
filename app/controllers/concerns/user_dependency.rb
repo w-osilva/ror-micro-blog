@@ -2,6 +2,13 @@ module UserDependency
   extend ActiveSupport::Concern
 
   def user_required!
-    redirect_to root_path, alert: "You need to login" if !user_signed_in?
+    unless user_signed_in?
+      flash[:warning] = 'You need to login'
+      redirect_to root_path
+    end
+  end
+
+  def load_user
+    @user = current_user
   end
 end
