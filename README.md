@@ -10,3 +10,18 @@ As instruções para a realização do teste podem ser visualizadas em [Instruç
 
 ## Instalação
 
+### Database
+
+```
+    $ rake db:create
+    $ rake db:migrate
+    $ rake db:seed
+```
+
+### WebServer
+
+```
+   $ rails s
+```
+
+Acesse a url [http://localhost:3000](http://localhost:3000)
