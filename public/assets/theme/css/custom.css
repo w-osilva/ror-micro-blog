@@ -1,0 +1,181 @@
+.light{
+    background-color: #f9fafc;
+    border-bottom: 1px solid #d2d6de;
+    min-height: 41px;
+}
+.submenu{
+    position: fixed;
+    width: 100%;
+    top: 50px;
+    left: 0;
+    z-index: 10;
+}
+.submenu .header{
+    position: fixed;
+    left: 0;
+    width: 230px;
+    color: #444;
+}
+.submenu .header h1{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+}
+.submenu .body{
+    position: fixed;
+    left: 230px;
+    width: 100%;
+}
+.submenu .item {
+    position: relative;
+    display: inline-block;
+}
+.submenu .item-separator{
+    position: absolute;
+    display: inline;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    border-left: 1px solid #d2d6de;
+}
+.submenu .item a {
+    color: #444;
+    font-weight: 600;
+    display: inline-block;
+    padding: 10px;
+}
+.submenu .item a:active,
+.submenu .item a:hover{
+    background: #f4f4f5;
+    color: #000;
+    text-decoration: none;
+}
+.submenu .item.item-dropdown .menu-dropdown{
+    position:fixed;
+    border: none;
+    width: 230px;
+    display:none;
+}
+.content{ margin-top: 50px;}
+/**/
+.main-header{ position: fixed}
+.main-footer{ margin-left: auto}
+.main-header>.navbar {margin-left: 0 !important;}
+.main-sidebar{
+    position: fixed;
+    display: none;
+    border-right: 1px solid #d2d6de;
+}
+.content-wrapper{
+    margin-left: auto;
+    min-height: 85vh;
+}
+/**/
+.skin-blue-light .sidebar-menu>li.active { border-left-style: solid }
+.btn-create { margin: 10px }
+/**/
+.box-filters {
+    position: fixed;
+    width: 23.5%;
+    right: 10px;
+}
+.box-filters .btn-filter {
+    margin-top: 15px;
+    float: right;
+}
+.box-content {
+    width: 74%;
+}
+/**/
+ul > li.list-group-item:first-child { border-top: inherit}
+h1 { margin-top: 0; font-size: 24px; }
+h1 > small { font-size: 16px; display: inline-block; padding-left: 4px; font-weight: 300; }
+h3.timeline-header > small { font-size: 85%; color: #999; padding-top: 10px; display: block; font-weight: 500; }
+li > .comment-avatar {
+    margin: 0 0 0 12px;
+    position: absolute;
+    border-radius: 50px;
+    border: 2px solid #00a65a;
+    width: 40px;
+    height: 40px;
+}
+img.emoji{max-height: 16px}
+a.back-to-top {
+    display: none;
+    width: 40px;
+    height: 40px;
+    text-indent: -999px;
+    position: fixed;
+    z-index: 999;
+    right: 15px;
+    bottom: 5px;
+    background: #3c8dbc url("/assets/theme/images/up-arrow.png") no-repeat center 43%;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+}
+a:hover.back-to-top {
+    background-color: #367fa9;
+}
+
+
+.box-sem-tamanho {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('/assets/images/publish-loader.gif')
+                50% 50%
+                no-repeat;
+}
+
+
+/* Ajuste devido navbar fixed*/
+section.content { padding-top: 60px; }
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+.bootstrap-tagsinput {
+    width: 100%;
+    margin-left: 0;
+    border-radius: 0;
+    background-color: rgba(255,255,255,0.0);
+}
+/* Block level inputs*/
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 28px;        // Make inputs at least the height of their button counterpart
+  .box-sizing(border-box); // Makes inputs behave like true block-level elements
+}
+.bootstrap-tagsinput input {
+  min-width: 500px;  //change as wanted
+ }
