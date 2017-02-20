@@ -12,6 +12,7 @@ As instruções para a realização do teste podem ser visualizadas em [Instruç
 
 ### Database
 
+Criar o banco de dados
 ```
     $ rake db:create
     $ rake db:migrate
